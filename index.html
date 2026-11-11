@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+<title>Dao Le Nhat Trinh – Senior Game Developer</title>
+<meta name="description" content="Portfolio of Dao Le Nhat Trinh, Senior Game Developer (Unity, client-side) at Gameloft Vietnam.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F3F5FF;
+  --surface: #FFFFFF;
+  --ink: #1B1F3B;
+  --muted: #4A5072;
+  --line: #D9DDF2;
+  --blue: #2F4FE0;
+  --blue-ink: #FFFFFF;
+  --sun: #FFC23C;
+  --sun-ink: #1B1F3B;
+  --track: #DDE2FA;
+  --c1: #2F4FE0; --c2: #7A3FD1; --c3: #E8603C; --c4: #0E8F7E; --c5: #D43F7A; --c6: #35405F;
+  --tile-ink: #FFFFFF;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12142A; --surface: #1B1E3A; --ink: #ECEEFF; --muted: #B4B9DA; --line: #2E3358;
+    --blue: #7D93FF; --blue-ink: #12142A; --sun: #FFC23C; --sun-ink: #12142A; --track: #2A2F55;
+    --c1: #3550D6; --c2: #6B36BD; --c3: #C2502F; --c4: #0C7A6C; --c5: #B5346A; --c6: #3A4568;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12142A; --surface: #1B1E3A; --ink: #ECEEFF; --muted: #B4B9DA; --line: #2E3358;
+  --blue: #7D93FF; --blue-ink: #12142A; --sun: #FFC23C; --sun-ink: #12142A; --track: #2A2F55;
+  --c1: #3550D6; --c2: #6B36BD; --c3: #C2502F; --c4: #0C7A6C; --c5: #B5346A; --c6: #3A4568;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0625rem; line-height: 1.6;
+}
+h1, h2, h3, .hero-role, .lv, .cover-title { font-family: "Archivo", "Arial Narrow", Arial, sans-serif; font-stretch: 112%; }
+h1, h2, h3 { line-height: 1.1; margin: 0; }
+a { color: var(--blue); }
+a:focus-visible, .btn:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+section { padding: 4.5rem 0; }
+.section-head { max-width: 62ch; margin-bottom: 2.25rem; }
+.section-head h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; }
+.section-head p { color: var(--muted); margin: 0.6rem 0 0; }
+
+/* Hero */
+.hero { padding: 5rem 0 3.5rem; }
+.hero-name { font-size: clamp(2.8rem, 8.5vw, 6.2rem); font-weight: 800; letter-spacing: -0.035em; line-height: 0.95; }
+.hero-role { font-weight: 500; font-size: clamp(1.25rem, 2.6vw, 1.75rem); margin-top: 1.1rem; color: var(--muted); }
+.hero-intro { max-width: 60ch; margin: 1.5rem 0 2rem; font-size: 1.15rem; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+  padding: 0.7rem 1.4rem; border-radius: 999px; font-weight: 600; text-decoration: none;
+  border: 2px solid transparent;
+}
+.btn-primary { background: var(--sun); color: var(--sun-ink); }
+.btn-primary:hover { filter: brightness(1.05); }
+.btn-ghost { border-color: var(--ink); color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--bg); }
+
+/* Level track */
+.track { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 2rem 1.75rem 1.75rem; }
+.bar { height: 14px; border-radius: 999px; background: var(--track); overflow: hidden; }
+.bar-fill { height: 100%; width: 100%; background: linear-gradient(90deg, var(--blue), var(--sun)); transform-origin: left; animation: fill 1.6s cubic-bezier(.2,.8,.2,1) 0.3s both; }
+@keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .bar-fill { animation: none; } }
+.levels { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+.levels li { position: relative; }
+.lv { font-weight: 800; font-size: 0.95rem; color: var(--blue); }
+.levels h3 { font-size: 1.2rem; margin: 0.25rem 0 0.35rem; }
+.levels p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.levels li.now .lv { color: var(--ink); }
+.levels li.now h3::after { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--sun); margin-left: 0.5rem; vertical-align: middle; }
+
+/* Projects */
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.project { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+.project.feature { grid-column: span 2; display: grid; grid-template-columns: 1.1fr 1fr; }
+.cover {
+  background: var(--tile); color: var(--tile-ink); padding: 1.5rem; min-height: 190px;
+  display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;
+}
+.cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cover.has-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,12,30,0.1) 35%, rgba(10,12,30,0.78)); }
+.cover.has-art img { left: auto; width: 58%; padding: 0.75rem; object-fit: contain; object-position: right center; }
+.cover.has-art .cover-title { max-width: 9ch; text-shadow: 0 2px 14px rgba(10,12,30,0.45); }
+.cover.has-photo { min-height: 250px; }
+.cover.has-photo.light-bg::after { background: linear-gradient(180deg, rgba(10,12,30,0.72) 0%, rgba(10,12,30,0.2) 28%, rgba(10,12,30,0.2) 45%, rgba(10,12,30,0.9) 100%); }
+.cover.has-photo .cover-title, .cover.has-photo .cover-meta { text-shadow: 0 1px 10px rgba(10,12,30,0.5); }
+.cover-title { font-weight: 800; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.02em; line-height: 1; max-width: 14ch; position: relative; z-index: 1; }
+.cover-meta { font-weight: 600; font-size: 0.95rem; opacity: 0.92; position: relative; z-index: 1; }
+.project.feature .cover { min-height: 320px; }
+.project.feature .cover-title { font-size: clamp(2rem, 4.2vw, 3rem); }
+.body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; gap: 0.9rem; flex: 1; }
+.role { font-weight: 600; color: var(--muted); font-size: 0.95rem; margin: 0; }
+.body ul { margin: 0; padding-left: 1.15rem; }
+.body li { margin-bottom: 0.35rem; }
+.tags { display: flex; flex-wrap: wrap; margin-top: auto; padding: 0; list-style: none; font-size: 0.92rem; color: var(--muted); }
+.tags::before { content: "Tech: "; font-weight: 600; color: var(--ink); white-space: pre; }
+.tags li { margin: 0; }
+.tags li + li::before { content: ", "; white-space: pre; }
+.more { font-weight: 600; }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem 2rem; }
+.skills h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.skills p { margin: 0; color: var(--muted); }
+
+/* Contact */
+.contact { background: var(--ink); color: var(--bg); border-radius: 28px; padding: 3rem 2rem; }
+.contact h2 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; letter-spacing: -0.02em; max-width: 18ch; }
+.contact p { max-width: 55ch; margin: 1rem 0 1.75rem; opacity: 0.9; }
+.contact .btn-ghost { border-color: var(--bg); color: var(--bg); }
+.contact .btn-ghost:hover { background: var(--bg); color: var(--ink); }
+footer { padding: 2rem 0 3rem; color: var(--muted); font-size: 0.9rem; }
+
+/* Player section */
+.play { display: grid; grid-template-columns: 1.35fr 1fr; gap: 2.5rem; align-items: center; }
+.play figure { margin: 0; }
+.photo-wrap { position: relative; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); }
+.photo-wrap img { display: block; width: 100%; height: auto; }
+.me-tag {
+  position: absolute; left: 35%; top: 2.5%; transform: translateX(-50%);
+  background: var(--sun); color: var(--sun-ink); font-weight: 700; font-size: 0.95rem;
+  padding: 0.35rem 0.85rem; border-radius: 999px; white-space: nowrap; box-shadow: 0 4px 14px rgba(10,12,30,0.25);
+}
+.me-tag::after {
+  content: ""; position: absolute; left: 50%; bottom: -7px; transform: translateX(-50%);
+  border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid var(--sun);
+}
+.play figcaption { margin-top: 0.75rem; color: var(--muted); font-size: 0.95rem; }
+.play-text h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.play-text p { margin: 0 0 1rem; }
+.result { font-family: "Archivo", Arial, sans-serif; font-stretch: 112%; font-weight: 800; font-size: 1.35rem; color: var(--blue); }
+.play.flip { grid-template-columns: 1fr 1.35fr; }
+.play-icon { position: relative; z-index: 1; width: 64px; height: 64px; border-radius: 50%; background: var(--sun); display: grid; place-items: center; }
+.play-icon svg { width: 26px; height: 26px; margin-left: 4px; }
+.video-link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+
+@media (max-width: 860px) {
+  .play, .play.flip { grid-template-columns: 1fr; gap: 1.5rem; }
+  .levels { grid-template-columns: repeat(2, 1fr); }
+  .grid { grid-template-columns: 1fr; }
+  .project.feature { grid-column: auto; grid-template-columns: 1fr; }
+  .project.feature .cover { min-height: 220px; }
+  .skills { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .levels, .skills { grid-template-columns: 1fr; }
+  section { padding: 3.25rem 0; }
+  .hero { padding-top: 3rem; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="wrap">
+      <h1 class="hero-name">Dao Le<br>Nhat Trinh</h1>
+      <p class="hero-role">Senior Game Developer (Unity, client-side) at Gameloft Vietnam</p>
+      <p class="hero-intro">I build gameplay systems for large mobile games: AI bots that race like real players, custom map editors, procedural dungeon tools and real-time 3D story scenes. I work mainly in Unity and C#, with a C++ background and experience in Unreal Engine and Cocos Creator.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#work">See my work</a>
+        <a class="btn btn-ghost" href="mailto:trinhdaolenhat94@gmail.com">Email me</a>
+      </div>
+    </div>
+  </header>
+
+  <section aria-labelledby="career-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="career-h">Career path</h2>
+        <p>9 years at Gameloft Vietnam in Ho Chi Minh City, including 7 years on mobile games.</p>
+      </div>
+      <div class="track">
+        <div class="bar" aria-hidden="true"><div class="bar-fill"></div></div>
+        <ol class="levels">
+          <li>
+            <span class="lv">2017</span>
+            <h3>Junior Game Developer</h3>
+            <p>C++ and JavaScript. Asphalt 8 and Asphalt 9 (Windows Store), playable ad games.</p>
+          </li>
+          <li>
+            <span class="lv">2019</span>
+            <h3>Mid-level Game Developer</h3>
+            <p>Unity and C#. Applaydu by Ferrero and Applaydu and Friends.</p>
+          </li>
+          <li>
+            <span class="lv">2024</span>
+            <h3>Senior Game Developer</h3>
+            <p>Unity and Unreal Engine. Claynosaurz Champions and a Dungeons &amp; Dragons tool.</p>
+          </li>
+          <li class="now">
+            <span class="lv">Now</span>
+            <h3>Applaydu Let’s Story</h3>
+            <p>3D story book with real-time cutscenes, launching globally in January 2027.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="work-h" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="work-h">Selected work</h2>
+        <p>What I built on each project, with the engine and the systems involved.</p>
+      </div>
+      <div class="grid">
+
+        <article class="project feature">
+          <div class="cover has-art" style="--tile: var(--c1)">
+            <img src="images/lets-story-places.png" alt="Applaydu Let’s Story place cards: a beach hut, a snowy mountain village and a castle">
+            <span class="cover-meta">Unity, 2026 to now</span>
+            <h3 class="cover-title">Applaydu Let’s Story</h3>
+          </div>
+          <div class="body">
+            <p class="role">Senior Game Developer, Gameloft for Ferrero</p>
+            <ul>
+              <li>Develop an interactive 3D story book where real-time cutscenes play the book’s content.</li>
+              <li>Build the story and cutscene system so designers can add content without code changes.</li>
+              <li>Profile and optimize 3D scenes with Unity Profiler to run smoothly on a wide range of phones.</li>
+            </ul>
+            <ul class="tags"><li>Unity</li><li>Real-time cutscenes</li><li>Mobile optimization</li></ul>
+            <a class="more" href="https://www.kinder.com/me/en/lets-story">About Let’s Story</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="cover has-photo light-bg" style="--tile: var(--c3)">
+            <img src="images/claynosaurz.jpg" alt="Claynosaurz characters: a group of clay-style dinosaurs" style="object-position: center 28%">
+            <span class="cover-meta">Unity, 2024 to 2026</span>
+            <h3 class="cover-title">Claynosaurz Champions</h3>
+          </div>
+          <div class="body">
+            <p class="role">Senior Game Developer</p>
+            <ul>
+              <li>3 minigames, from prototype to release.</li>
+              <li>Dinosaur training system: players level up their dinosaurs through training minigames, with XP rewards and level-up progression.</li>
+              <li>Daily reward system that brings players back each day.</li>
+            </ul>
+            <ul class="tags"><li>Unity</li><li>Minigames</li><li>Progression systems</li></ul>
+            <a class="more" href="https://apps.apple.com/ph/app/claynosaurz-champions/id6747367615">App Store page</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="cover has-photo" style="--tile: var(--c4)">
+            <img src="images/applaydu-friends.jpg" alt="Applaydu and Friends key art: five player characters on a race track" style="object-position: center 55%">
+            <span class="cover-meta">Unity, 2022 to 2024</span>
+            <h3 class="cover-title">Applaydu and Friends</h3>
+          </div>
+          <div class="body">
+            <p class="role">Mid-level Game Developer</p>
+            <ul>
+              <li>Offline AI bots that race like real players, with Easy, Normal and Smart difficulty levels.</li>
+              <li>Custom map editor where players build race layouts from obstacles and play with friends in private rooms.</li>
+              <li>Path validation so every custom map keeps a clear route to the finish.</li>
+            </ul>
+            <ul class="tags"><li>Game AI</li><li>Multiplayer</li><li>Pathfinding</li></ul>
+            <a class="more" href="https://play.google.com/store/apps/details?id=com.ferrero.applaydufriendsgp">Google Play page</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="cover has-photo" style="--tile: var(--c2)">
+            <img src="images/dungeon.jpg" alt="Dungeons &amp; Dragons logo over a fantasy night scene">
+            <span class="cover-meta">Unreal Engine, 2026</span>
+            <h3 class="cover-title">Dungeon generator</h3>
+          </div>
+          <div class="body">
+            <p class="role">Senior Game Developer, Dungeons &amp; Dragons project</p>
+            <ul>
+              <li>Procedural tool that creates random multi-floor dungeon maps for game designers.</li>
+              <li>Designed the generation algorithm for rooms, corridors and floor connections.</li>
+              <li>Designers can generate and test new layouts in minutes, without programmer help.</li>
+            </ul>
+            <ul class="tags"><li>Unreal Engine</li><li>Procedural generation</li><li>Tools</li></ul>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="cover has-photo" style="--tile: var(--c5)">
+            <img src="images/applaydu.jpg" alt="Applaydu by Ferrero key art: animals, mermaids and robots across three worlds">
+            <span class="cover-meta">Unity, 2019 to 2022</span>
+            <h3 class="cover-title">Applaydu by Ferrero</h3>
+          </div>
+          <div class="body">
+            <p class="role">Mid-level Game Developer, a game reaching 60M+ families</p>
+            <ul>
+              <li>Owned the story-crafting feature for animal toys.</li>
+              <li>Built a Unity editor tool so the narrative team could create toy stories without programmer help.</li>
+              <li>3D exploration and story progression across 4 environments, with minigames along the path.</li>
+            </ul>
+            <ul class="tags"><li>Unity</li><li>Editor tools</li><li>3D exploration</li></ul>
+            <a class="more" href="https://play.google.com/store/apps/details?id=com.ferrero.applayduGP">Google Play page</a>
+          </div>
+        </article>
+
+        <article class="project feature">
+          <div class="cover has-photo light-bg" style="--tile: var(--c6)">
+            <img src="images/lego.jpg" alt="LEGO® Friends characters together with a guitar" style="object-position: center 25%">
+            <span class="cover-meta">Cocos Creator, freelance, 2024</span>
+            <h3 class="cover-title">LEGO® Friends Heartlake Friendship Zone</h3>
+          </div>
+          <div class="body">
+            <p class="role">Freelance Game Developer, with an agency’s design team</p>
+            <ul>
+              <li>Built the interactive LEGO® Friends town, including the buildings and their assets.</li>
+              <li>Developed all 6 minigames, each opened from a different building: music, skateboarding, cooking, pet care, puzzle, memory and object finding.</li>
+              <li>Optimized loading and performance for mobile browsers on iOS and Android. Delivered in 2 months.</li>
+            </ul>
+            <ul class="tags"><li>Cocos Creator</li><li>Web and mobile browser</li><li>6 minigames</li></ul>
+            <a class="more" href="https://heartlakefriendshipzone.com/">Play it online</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="cover has-photo" style="--tile: var(--c6)">
+            <img src="images/asphalt.jpg" alt="Asphalt 9: Legends key art: an orange supercar on a city street" style="object-position: center 35%">
+            <span class="cover-meta">C++, 2017 to 2019</span>
+            <h3 class="cover-title">Asphalt 8 and Asphalt 9</h3>
+          </div>
+          <div class="body">
+            <p class="role">Junior Game Developer, Windows Store versions</p>
+            <ul>
+              <li>Maintained the Windows Store versions in C++, including around Asphalt 9’s worldwide launch in 2018.</li>
+              <li>Investigated and fixed bugs, crashes and performance issues.</li>
+            </ul>
+            <ul class="tags"><li>C++</li><li>Live games</li><li>Bug fixing</li></ul>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="cover" style="--tile: var(--c2)">
+            <span class="play-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#1B1F3B"><path d="M7 4.5v15l12-7.5z"/></svg></span>
+            <h3 class="cover-title">MapleStory-inspired game</h3>
+          </div>
+          <div class="body">
+            <p class="role">Personal project, gameplay video</p>
+            <p style="margin:0">A 2D side-scrolling game I made, inspired by MapleStory.</p>
+            <a class="more video-link" href="https://www.youtube.com/watch?v=Hu7f3E5mVi0">Watch the gameplay video on YouTube</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="cover" style="--tile: var(--c4)">
+            <span class="cover-meta">Cocos Creator, freelance</span>
+            <h3 class="cover-title">Casual mobile games</h3>
+          </div>
+          <div class="body">
+            <p class="role">Freelance Game Developer, private clients</p>
+            <ul>
+              <li>Built 2 complete games alone, a board game and a tennis game, each delivered in about one month.</li>
+              <li>Client details are under NDA.</li>
+            </ul>
+            <ul class="tags"><li>Cocos Creator</li><li>Solo development</li></ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="skills-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="skills-h">Skills</h2>
+      </div>
+      <div class="skills">
+        <div><h3>Engines</h3><p>Unity, Unreal Engine, Cocos Creator, Roblox</p></div>
+        <div><h3>Languages</h3><p>C#, C++, JavaScript, TypeScript, Java</p></div>
+        <div><h3>Core</h3><p>OOP, data structures and algorithms, design patterns (Singleton, Object Pool, State Machine, Factory, MVC/MVP), procedural generation, game AI</p></div>
+        <div><h3>Mobile</h3><p>iOS, Android, performance optimization with Unity Profiler, Memory Profiler and Android Profiler</p></div>
+        <div><h3>Graphics and multiplayer</h3><p>URP and Built-in Render Pipeline, Shader Graph, real-time 3D cutscenes, Unity Netcode for GameObjects</p></div>
+        <div><h3>Spoken languages</h3><p>Vietnamese (native), English (intermediate)</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="award-h">
+    <div class="wrap">
+      <div class="play flip">
+        <div class="play-text">
+          <h2 id="award-h">Recognized at Gameloft</h2>
+          <p class="result">Programmer of the Month, 2019</p>
+          <p>Gameloft Vietnam named me Programmer of the Month for outstanding performance, service and dedication.</p>
+          <p>It came early in my career, two years after I joined the studio as a junior developer.</p>
+        </div>
+        <figure>
+          <div class="photo-wrap">
+            <img src="images/award.jpg" alt="Gameloft Vietnam Programmer of the Month certificate and glass trophy presented to Dao Le Nhat Trinh" loading="lazy">
+          </div>
+          <figcaption>My Programmer of the Month certificate and trophy from Gameloft Vietnam.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="play-h">
+    <div class="wrap">
+      <div class="play">
+        <figure>
+          <div class="photo-wrap">
+            <img src="images/contest.jpg" alt="Three people at Gameloft Vietnam celebrating the SEA Gaming Contest 2024 Saigon local qualifier. Trinh is on the left in the green shirt, holding the prize envelope." loading="lazy">
+            <span class="me-tag">This is me</span>
+          </div>
+          <figcaption>Me on the left, in the green shirt, with the prize envelope after the Saigon local qualifier at Gameloft Vietnam.</figcaption>
+        </figure>
+        <div class="play-text">
+          <h2 id="play-h">I play the games too</h2>
+          <p class="result">1st place, SEA Gaming Contest 2024</p>
+          <p>I took 1st place in Gameloft Southeast Asia’s SEA Gaming Contest 2024, an Asphalt Legends Unite tournament hosted by the company.</p>
+          <p>It came from my work as a developer. Fixing bugs on Asphalt meant testing the game again and again, so I learned how its logic works underneath: how the cars and tracks behave, where races are won and lost, and which choices give the best result. Knowing the game from the inside is what helped me win it as a player.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="contact">
+        <h2 id="contact-h">Let’s make the next game together</h2>
+        <p>Based in Ho Chi Minh City. When I’m not building games, I’m playing them, usually Fire Emblem or another Nintendo game.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:trinhdaolenhat94@gmail.com">trinhdaolenhat94@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">Game names and trademarks belong to their owners. Shown here as examples of my work.</div>
+</footer>
+</body>
+</html>
